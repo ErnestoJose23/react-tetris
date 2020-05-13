@@ -58,3 +58,7 @@ export const TETROMINOS = {
         color: '227, 78, 78',
     },
 }
+
+expor const randomTetromino = () => {
+
+}
