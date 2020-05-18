@@ -13,14 +13,18 @@ export const useStage = (player, resetPlayer) => {
             player.tetromino.forEach((row, y) => {
                 row.forEach((value, x) => {
                     if( value !== 0){
-                        newStage[y + player.pos.y][x + player.pos.x];
+                        newStage[y + player.pos.y][x + player.pos.x] = [
+                            value,
+                            `${player.collided ? 'merged': 'clear'}`,
+                        ]
                     }
-                })
-            })
-        }
+                });
+            });
+            return newStage;
+        };
 
         setStage(prev =>updateStage(prev))
-    }, [])
+    }, [player.collided, player.pos.x, player.pos.x, player.tetromino]);
 
     return [stage, setStage];
 }
