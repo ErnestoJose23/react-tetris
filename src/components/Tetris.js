@@ -23,6 +23,8 @@ const Tetris = () => {
     const movePlayer = dir => {
         if (!checkCollision(player, stage, { x: dir, y: 0 })) {
             updatePlayerPos({ x: dir, y: 0 });
+            console.log(player.pos.x);
+
         }
     }
 
@@ -37,8 +39,9 @@ const Tetris = () => {
         if (!checkCollision(player, stage, { x: 0, y: 1 })) {
             updatePlayerPos({ x: 0, y: 1, collided: false });
         } else {
+            // Game over!
             if (player.pos.y < 1) {
-                console.log('Game over');
+                console.log('GAME OVER!!!');
                 setGameOver(true);
                 setDropTime(null);
             }
@@ -52,23 +55,20 @@ const Tetris = () => {
 
     const move = ({ keyCode }) => {
         if (!gameOver) {
-            switch (keyCode) {
-                case 37:
-                    movePlayer(-1);
-                    break;
-                case 39:
-                    movePlayer(1);
-                    break;
-                case 40:
-                    dropPlayer();
-                    break;
-                case 38:
-                    playerRotate(stage, 1);
-                    break;
-
+            if (keyCode === 37) {
+                movePlayer(-1);
+                player.pos.x += 1;
+            } else if (keyCode === 39) {
+                movePlayer(1);
+                player.pos.x -= 1;
+            } else if (keyCode === 40) {
+                dropPlayer();
+                player.pos.y -= 1;
+            } else if (keyCode === 38) {
+                playerRotate(stage, 1);
             }
         }
-    }
+    };
 
     return (
         <StyledTetrisWrapper role="button" tabIndex="0" onKeyDown={e => move(e)}>

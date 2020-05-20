@@ -7,7 +7,7 @@ export const useStage = (player, resetPlayer) => {
     useEffect(() => {
         const updateStage = prevStage => {
             const newStage = prevStage.map(row =>
-                row.map(cell => (cell[1] === 'clear' ? [0, 'clear'] : cell))
+                row.map(cell => (cell[1] === 'clear' ? [0, 'clear'] : cell)),
             );
 
             player.tetromino.forEach((row, y) => {
