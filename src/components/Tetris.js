@@ -46,6 +46,7 @@ const Tetris = () => {
                 setDropTime(null);
             }
             updatePlayerPos({ x: 0, y: 0, collided: true });
+            player.pos.y += 1;
         }
     }
 
