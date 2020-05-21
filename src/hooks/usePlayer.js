@@ -38,12 +38,13 @@ export const usePlayer = () => {
     }
 
     const updatePlayerPos = ({ x, y, collided }) => {
+        console.log(player.pos.y);
         setPlayer(prev => ({
             ...prev,
-            pos: { x: (prev.pos.x += x), y: (prev.pos.y += y) },
+            pos: { x: (prev.pos.x += x * 0.5), y: (prev.pos.y += y * 0.5) },
             collided,
         }));
-        console.log(y);
+        console.log(player.pos.y);
     };
 
     const resetPlayer = useCallback(() => {

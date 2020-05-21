@@ -34,11 +34,13 @@ const Tetris = () => {
         setStage(createStage());
         resetPlayer();
         setGameOver(false);
+        setDropTime(1000);
     }
 
     const drop = () => {
         if (!checkCollision(player, stage, { x: 0, y: 1 })) {
             updatePlayerPos({ x: 0, y: 1, collided: false });
+
         } else {
             // Game over!
             if (player.pos.y < 1) {
@@ -47,9 +49,10 @@ const Tetris = () => {
                 setDropTime(null);
             }
             updatePlayerPos({ x: 0, y: 0, collided: true });
-            player.pos.y += 1;
         }
+
     }
+
 
     const dropPlayer = () => {
         drop();
@@ -59,13 +62,11 @@ const Tetris = () => {
         if (!gameOver) {
             if (keyCode === 37) {
                 movePlayer(-1);
-                player.pos.x += 1;
             } else if (keyCode === 39) {
                 movePlayer(1);
-                player.pos.x -= 1;
             } else if (keyCode === 40) {
                 dropPlayer();
-                player.pos.y -= 1;
+
             } else if (keyCode === 38) {
                 playerRotate(stage, 1);
             }
@@ -74,7 +75,7 @@ const Tetris = () => {
 
     useInterval(() => {
         drop();
-    })
+    }, dropTime);
 
     return (
         <StyledTetrisWrapper role="button" tabIndex="0" onKeyDown={e => move(e)}>
