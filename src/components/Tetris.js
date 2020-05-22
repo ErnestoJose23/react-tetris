@@ -94,7 +94,7 @@ const Tetris = () => {
     }, dropTime);
 
     return (
-        <StyledTetrisWrapper role="button" tabIndex="0" onKeyDown={e => move(e)} onKeyUp={keyUp}>
+        <StyledTetrisWrapper role="button" tabIndex="0" onKeyDown={e => move(e)} onKeyUp={KeyUp}>
             <StyledTetris>
                 <Stage stage={stage} />
                 <aside>
@@ -103,9 +103,9 @@ const Tetris = () => {
                     ) : (
                             <div>
 
-                                <Display text="Score" />
-                                <Display text="Rows" />
-                                <Display text="Level" />
+                                <Display text={`Score: ${score}`} />
+                                <Display text={`Rows: ${rows}`} />
+                                <Display text={`Level: ${level}`} />
                             </div>
                         )}
                     <StartButton callback={startGame} />
